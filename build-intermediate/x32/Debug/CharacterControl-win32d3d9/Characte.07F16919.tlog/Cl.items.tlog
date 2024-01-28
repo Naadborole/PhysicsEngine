@@ -1,0 +1,16 @@
+D:\Assignment\GED_VC\Code\CharacterControl\Characters\SoldierNPC.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\SoldierNPC.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Characters\SoldierNPCAnimationSM.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\SoldierNPCAnimationSM.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Characters\SoldierNPCBehaviorSM.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\SoldierNPCBehaviorSM.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Characters\SoldierNPCMovementSM.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\SoldierNPCMovementSM.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Client\ClientSpaceShip.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ClientSpaceShip.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Client\ClientSpaceShipControls.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ClientSpaceShipControls.obj
+D:\Assignment\GED_VC\Code\CharacterControl\ClientCharacterControlGame.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ClientCharacterControlGame.obj
+D:\Assignment\GED_VC\Code\CharacterControl\ClientGameObjectManagerAddon.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ClientGameObjectManagerAddon.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Events\Events.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\Events.obj
+D:\Assignment\GED_VC\Code\CharacterControl\GameObjectManagerAddon.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\GameObjectManagerAddon.obj
+D:\Assignment\GED_VC\Code\CharacterControl\GlobalRegistry.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\GlobalRegistry.obj
+D:\Assignment\GED_VC\Code\CharacterControl\ServerCharacterControlGame.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ServerCharacterControlGame.obj
+D:\Assignment\GED_VC\Code\CharacterControl\ServerGameObjectManagerAddon.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ServerGameObjectManagerAddon.obj
+D:\Assignment\GED_VC\Code\CharacterControl\Tank\ClientTank.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\ClientTank.obj
+D:\Assignment\GED_VC\Code\CharacterControl\WayPoint.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\WayPoint.obj
+D:\Assignment\GED_VC\Code\CharacterControl\main.cpp;D:\Assignment\GED_VC\build-intermediate\x32\Debug\CharacterControl-win32d3d9\main.obj
