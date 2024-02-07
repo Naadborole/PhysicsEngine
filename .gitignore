@@ -6,6 +6,7 @@
 !.vscode/*.code-snippets
 build/
 build-intermediate/
+.vs/
 # Local History for Visual Studio Code
 .history/
 
