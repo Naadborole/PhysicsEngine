@@ -9,6 +9,7 @@
 #include <assert.h>
 
 // Inter-Engine includes
+#include "Sphere.h"
 #include "PrimeEngine/MemoryManagement/Handle.h"
 #include "PrimeEngine/PrimitiveTypes/PrimitiveTypes.h"
 
@@ -26,6 +27,7 @@ namespace PhysicsEngine
 		Vector3 currPos; //current position of the object
 		Vector3 destPos; //Destination position of object
 		AABB aabb;
+		Sphere sph;
 	public:
 		ShapeType type;
 		RigidBody(PE::GameContext& context, PE::MemoryArena arena, PE::Handle hMyself, ShapeType t) : Component(
@@ -33,7 +35,20 @@ namespace PhysicsEngine
 		{
 			type = t;
 		}
+		RigidBody(PE::GameContext& context, PE::MemoryArena arena, PE::Handle hMyself, ShapeType t, Sphere s) : Component(
+			context, arena, hMyself)
+		{
+			type = t;
+			sph = s;
+		}
+		RigidBody(PE::GameContext& context, PE::MemoryArena arena, PE::Handle hMyself, ShapeType t, AABB ab) : Component(
+			context, arena, hMyself)
+		{
+			type = t;
+			aabb = ab;
+		}
 		void setBoundingBox(AABB aabb);
+		void setSphere(Sphere s);
 		virtual void addDefaultComponents();
 		void updatePos(Vector3 currPos, Vector3 destPos);
 		void drawBoundingBox();

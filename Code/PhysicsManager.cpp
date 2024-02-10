@@ -26,3 +26,19 @@ void PhysicsEngine::PhysicsManager::drawBoundingBox()
 		}
 	}
 }
+
+void PhysicsEngine::PhysicsManager::checkCollision()
+{
+	for (UINT32 i = 0; i < Instance()->m_rigidBodies.m_size; i++)
+	{
+		RigidBody* ri = Instance()->m_rigidBodies[i].getObject<RigidBody>();
+		for (UINT32 j = 0; j < Instance()->m_rigidBodies.m_size; j++)
+		{
+			if(i == j)
+				continue;
+			RigidBody* rj = Instance()->m_rigidBodies[j].getObject<RigidBody>();
+			
+		}
+	}
+}
+

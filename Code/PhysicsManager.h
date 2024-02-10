@@ -28,6 +28,7 @@ namespace PhysicsEngine
 			m_rigidBodies.add(r);
 		}
 		static void drawBoundingBox();
+		static void checkCollision();
 		bool checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2);
 		Array<PE::Handle, 1> m_rigidBodies;
 		static PhysicsManager* selfPoint;

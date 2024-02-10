@@ -18,6 +18,12 @@ namespace PhysicsEngine
 		aabb = bb;
 	}
 
+	void RigidBody::setSphere(Sphere s)
+	{
+		sph = s;
+	}
+
+
 	void RigidBody::drawBoundingBox()
 	{
 		PE::Handle hParent = getFirstParentByType<Component>();
@@ -25,6 +31,10 @@ namespace PhysicsEngine
 		{
 			// see if parent has scene node component
 			PE::Components::SceneNode* SN = hParent.getObject<Component>()->getFirstComponent<PE::Components::SceneNode>();
+			if(!SN)
+			{
+				SN = hParent.getObject<PE::Components::SceneNode>();
+			}
 			if(SN)
 			{
 				Vector3 linepts[48];

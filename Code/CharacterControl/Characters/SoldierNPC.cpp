@@ -52,7 +52,7 @@ SoldierNPC::SoldierNPC(PE::GameContext &context, PE::MemoryArena arena, PE::Hand
 	//       +-behavior state machine
 
     
-	// need to acquire redner context for this code to execute thread-safe
+	// need to acquire renderer context for this code to execute thread-safe
 	m_pContext->getGPUScreen()->AcquireRenderContextOwnership(pEvt->m_threadOwnershipMask);
 	
 	PE::Handle hSN("SCENE_NODE", sizeof(SceneNode));
@@ -74,8 +74,9 @@ SoldierNPC::SoldierNPC(PE::GameContext &context, PE::MemoryArena arena, PE::Hand
 
 		//add RigidBody
 		PE::Handle hRigidBody("Soldier_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
-		PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::BOX);
-		pRigidBody->setBoundingBox(PhysicsEngine::AABB(0.5, 1.8, 0.4));
+		PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::SPHERE);
+		//pRigidBody->setBoundingBox(PhysicsEngine::AABB(0.5, 1.8, 0.4));
+		pRigidBody->setSphere(PhysicsEngine::Sphere(1.8/2,1.8/2));
 		pRigidBody->addDefaultComponents();
 		addComponent(hRigidBody);
 		//Add it to PhysicsManager

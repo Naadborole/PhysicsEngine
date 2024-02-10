@@ -18,6 +18,8 @@
 #include "CharacterControl/CharacterControlContext.h"
 
 #include "ClientTank.h"
+
+#include "PhysicsManager.h"
 #include "CharacterControl/Client/ClientSpaceShipControls.h"
 
 using namespace PE::Components;

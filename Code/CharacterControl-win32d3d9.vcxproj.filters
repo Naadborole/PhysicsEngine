@@ -61,6 +61,9 @@
     <ClInclude Include="AABB.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CharacterControl\Characters\SoldierNPC.cpp">

@@ -8,6 +8,8 @@
 
 // Sibling/Children includes
 #include "GameObjectManager.h"
+
+#include "PhysicsManager.h"
 #include "../Sound/SoundManager.h"
 
 #include "PrimeEngine/Scene/Skeleton.h"
@@ -326,6 +328,19 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 				pSN->m_base.setU(pRealEvent->m_u);
 				pSN->m_base.setV(pRealEvent->m_v);
 				pSN->m_base.setN(pRealEvent->m_n);
+				//--------------------------Add Tank Specific Code-------------------------------------------------
+				if(StringOps::strcmp(pRealEvent->m_meshFilename, "kingtiger.x_main_mesh.mesha") == 0)
+				{
+					PE::Handle hRigidBody("Tank_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::BOX);
+					pRigidBody->setBoundingBox(PhysicsEngine::AABB(2.5, 3, 4));
+					pRigidBody->addDefaultComponents();
+					pSN->addComponent(hRigidBody);
+					//Add it to PhysicsManager
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
+				}
+
+				//-------------------------------------------------------------------------------------------------
 			}
 			else
 			{
