@@ -13,6 +13,9 @@
     <Filter Include="Tank">
       <UniqueIdentifier>{93CA8C7C-7F01-8E0D-28EE-731014040A0F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicsEngine">
+      <UniqueIdentifier>{4f85e399-5069-4122-badc-83f572929e2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterControl\CharacterControlContext.h" />
@@ -49,6 +52,15 @@
     <ClInclude Include="CharacterControl\WayPoint.h" />
     <ClInclude Include="CharacterControl\test.h" />
     <ClInclude Include="CharacterControl\testfunc_c_stdcall.h" />
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CharacterControl\Characters\SoldierNPC.cpp">
@@ -83,6 +95,15 @@
     </ClCompile>
     <ClCompile Include="CharacterControl\WayPoint.cpp" />
     <ClCompile Include="CharacterControl\main.cpp" />
+    <ClCompile Include="AABB.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Masm Include="CharacterControl\test.asm" />

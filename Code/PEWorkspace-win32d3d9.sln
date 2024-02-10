@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CharacterControl-win32d3d9", "CharacterControl-win32d3d9.vcxproj", "{07F16919-F300-16EA-5CBA-7A0848E90483}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua_dist-win32d3d9", "lua_dist-win32d3d9.vcxproj", "{0EA98F94-FA8C-50EA-63ED-4A3D4FF03A6C}"
@@ -34,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D26091C-B4C7-491C-AEB1-967B6643CF9E}
 	EndGlobalSection
 EndGlobal

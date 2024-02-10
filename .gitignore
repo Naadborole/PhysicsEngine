@@ -16,3 +16,4 @@ build-intermediate/
 *.obj
 *.mtl
 *.bin
+*.exe

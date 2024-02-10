@@ -3,6 +3,8 @@
 #include "PrimeEngine/Scene/SkeletonInstance.h"
 #include "GlobalRegistry.h"
 
+#include "RigidBody.h"
+
 
 namespace PE {
 
@@ -195,6 +197,14 @@ void Register(PE::Components::LuaEnvironment *pLuaEnv, PE::GlobalRegistry *pRegi
 			pLuaEnv->EndRegistrationTable();
 		}
 		// end root.PE
+		pLuaEnv->EndRegistrationTable();
+
+		pLuaEnv->StartRegistrationTable("PhysicsEngine");
+		// start root.PhysicsEngine
+		{
+			PhysicsEngine::RigidBody::InitializeAndRegister(pLuaEnv, pRegistry, setLuaMetaDataOnly);
+		}
+		// end root.PhysicsEngine
 		pLuaEnv->EndRegistrationTable();
 	}
 	// end root

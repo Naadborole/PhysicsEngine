@@ -6,6 +6,9 @@
 #include "PrimeEngine/Scene/RootSceneNode.h"
 
 #include "SoldierNPC.h"
+
+#include "PhysicsManager.h"
+#include "RigidBody.h"
 #include "SoldierNPCAnimationSM.h"
 #include "SoldierNPCMovementSM.h"
 #include "SoldierNPCBehaviorSM.h"
@@ -68,6 +71,15 @@ SoldierNPC::SoldierNPC(PE::GameContext &context, PE::MemoryArena arena, PE::Hand
 	{
 		static int allowedEvts[] = {0};
 		addComponent(hSN, &allowedEvts[0]);
+
+		//add RigidBody
+		PE::Handle hRigidBody("Soldier_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
+		PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::BOX);
+		pRigidBody->setBoundingBox(PhysicsEngine::AABB(0.5, 1.8, 0.4));
+		pRigidBody->addDefaultComponents();
+		addComponent(hRigidBody);
+		//Add it to PhysicsManager
+		PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
 	}
 
 	int numskins = 1; // 8
@@ -159,6 +171,7 @@ SoldierNPC::SoldierNPC(PE::GameContext &context, PE::MemoryArena arena, PE::Hand
 
 	// add it to soldier NPC
 	addComponent(hSoldierBheaviorSM);
+
 
 	StringOps::writeToString(pEvt->m_patrolWayPoint, pSoldierBehaviorSM->m_curPatrolWayPoint, 32);
 	pSoldierBehaviorSM->m_havePatrolWayPoint = StringOps::length(pSoldierBehaviorSM->m_curPatrolWayPoint) > 0;

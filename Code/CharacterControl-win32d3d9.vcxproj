@@ -113,6 +113,7 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="CharacterControl\CharacterControlContext.h" />
     <ClInclude Include="CharacterControl\Characters\SoldierNPC.h" />
     <ClInclude Include="CharacterControl\Characters\SoldierNPCAnimationSM.h" />
@@ -131,8 +132,11 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     <ClInclude Include="CharacterControl\WayPoint.h" />
     <ClInclude Include="CharacterControl\test.h" />
     <ClInclude Include="CharacterControl\testfunc_c_stdcall.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="RigidBody.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="CharacterControl\Characters\SoldierNPC.cpp" />
     <ClCompile Include="CharacterControl\Characters\SoldierNPCAnimationSM.cpp" />
     <ClCompile Include="CharacterControl\Characters\SoldierNPCBehaviorSM.cpp" />
@@ -149,6 +153,8 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     <ClCompile Include="CharacterControl\Tank\ClientTank.cpp" />
     <ClCompile Include="CharacterControl\WayPoint.cpp" />
     <ClCompile Include="CharacterControl\main.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Masm Include="CharacterControl\test.asm" />

@@ -1,0 +1,8 @@
+LevelLoader.CreateGameObject("PEObject3_tArrow",-0.314502, 0.0, 0.949257, 0.0, 0.0, 1.0, -0.0, 0.0, -0.949257, -0.0, -0.314502, 0.0, 1664.82499, 0.0, 917.386991, 1.0, 'Assignment4.x_PEObject3_tArrow.lua', 'Assignment4',0x48ca0380, 0xc6d011ee, 0xbb815084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject0_pPlane1",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -8.326546, 0.0, -4.034357, 1.0, 'Assignment4.x_PEObject0_pPlane.lua', 'Assignment4',0x1d7fdc40, 0xc6d011ee, 0xa9935084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject2_nazi_rep",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -306.113371, 0.0, -678.906027, 1.0, 'Assignment4.x_PEObject2_nazi_r.lua', 'Assignment4',0x2b7e78b0, 0xc6d011ee, 0x97505084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject1_pkingTiger",0.771336, 0.0, 0.636429, 0.0, 0.0, 1.0, -0.0, 0.0, -0.636429, -0.0, 0.771336, 0.0, 470.275013, 0.0, 0.0, 1.0, 'Assignment4.x_PEObject1_pkingT.lua', 'Assignment4',0x219d7ad1, 0xc6d011ee, 0xa0185084, 0x92ffdadd)
+

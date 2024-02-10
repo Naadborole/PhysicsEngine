@@ -2,6 +2,7 @@
 #include "PrimeEngine/APIAbstraction/APIAbstractionDefines.h"
 #include "ClientGame.h"
 
+#include "PhysicsManager.h"
 #include "PrimeEngine/PrimeEngineIncludes.h"
 #include "PrimeEngine/RenderJob.h"
 #include "PrimeEngine/GameThreadJob.h"
@@ -209,7 +210,7 @@ namespace Components {
     RootSceneNode::Construct(context, MemoryArena_Client);
 	DebugRenderer::Construct(context, MemoryArena_Client);
 	CameraManager::Construct(context, MemoryArena_Client);
-    
+    PhysicsEngine::PhysicsManager::Construct();
     // initialize timer functionality
     Timer::Initialize();
 
