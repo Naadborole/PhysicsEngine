@@ -10,6 +10,7 @@
 
 // Inter-Engine includes
 #include "Sphere.h"
+#include "PrimeEngine/Math/Matrix4x4.h"
 #include "PrimeEngine/MemoryManagement/Handle.h"
 #include "PrimeEngine/PrimitiveTypes/PrimitiveTypes.h"
 
@@ -23,12 +24,11 @@ namespace PhysicsEngine
 	{
 		PE_DECLARE_CLASS(RigidBody);
 
-	private:
+	public:
 		Vector3 currPos; //current position of the object
 		Vector3 destPos; //Destination position of object
 		AABB aabb;
 		Sphere sph;
-	public:
 		ShapeType type;
 		RigidBody(PE::GameContext& context, PE::MemoryArena arena, PE::Handle hMyself, ShapeType t) : Component(
 			context, arena, hMyself)
@@ -52,5 +52,6 @@ namespace PhysicsEngine
 		virtual void addDefaultComponents();
 		void updatePos(Vector3 currPos, Vector3 destPos);
 		void drawBoundingBox();
+		Matrix4x4* getBase();
 	};
 }

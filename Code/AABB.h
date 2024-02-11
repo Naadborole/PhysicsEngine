@@ -1,4 +1,6 @@
 #pragma once
+#include "PrimeEngine/Math/Vector3.h"
+
 namespace PhysicsEngine
 {
 	struct AABB
@@ -16,5 +18,6 @@ namespace PhysicsEngine
 			Vex = vx;
 			Nex = nx;
 		}
+		Vector3* getBoundingPoints(Vector3 pos, Vector3 points[], Vector3 u, Vector3 v, Vector3 n);
 	};
 }

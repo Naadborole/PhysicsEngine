@@ -334,6 +334,7 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 					PE::Handle hRigidBody("Tank_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
 					PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::BOX);
 					pRigidBody->setBoundingBox(PhysicsEngine::AABB(2.5, 3, 4));
+					//pRigidBody->setSphere(PhysicsEngine::Sphere(4,1.5));
 					pRigidBody->addDefaultComponents();
 					pSN->addComponent(hRigidBody);
 					//Add it to PhysicsManager

@@ -354,7 +354,7 @@ int ClientGame::runGameFrame()
 						PEString::s_buf, true, false, false, false, 0,
 						Vector3(.0f, .075f, 0), 1.0f, m_pContext->m_gameThreadThreadOwnershipMask);
 				}
-
+				PhysicsEngine::PhysicsManager::checkCollision();
 				PhysicsEngine::PhysicsManager::drawBoundingBox();
 
 				//debug draw root and grid

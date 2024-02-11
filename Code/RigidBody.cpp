@@ -108,5 +108,17 @@ namespace PhysicsEngine
 		}
 	}
 
+	Matrix4x4* RigidBody::getBase()
+	{
+		PE::Handle hParent = getFirstParentByType<PE::Components::Component>();
+		PE::Components::SceneNode* aSN = hParent.getObject<PE::Components::Component>()->getFirstComponent<PE::Components::SceneNode>();
+		if(!aSN)
+		{
+			aSN = hParent.getObject<PE::Components::SceneNode>();
+		}
+		return &aSN->m_base;
+	}
+
+
 }
 

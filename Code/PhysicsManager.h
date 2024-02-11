@@ -32,6 +32,9 @@ namespace PhysicsEngine
 		bool checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2);
 		Array<PE::Handle, 1> m_rigidBodies;
 		static PhysicsManager* selfPoint;
+		static bool SAT(RigidBody a, RigidBody b);
+		static bool SphereToSphere(RigidBody* a, RigidBody* b);
+		static bool AABBToAABB(RigidBody* a, RigidBody* b);
 	};
 }
 #endif
