@@ -35,6 +35,7 @@ namespace PhysicsEngine
 		static bool SAT(RigidBody a, RigidBody b);
 		static bool SphereToSphere(RigidBody* a, RigidBody* b);
 		static bool AABBToAABB(RigidBody* a, RigidBody* b);
+		RigidBody* Ground;
 	};
 }
 #endif

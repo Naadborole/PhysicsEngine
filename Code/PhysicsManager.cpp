@@ -41,7 +41,7 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 			{
 				if (AABBToAABB(ri, rj))
 				{
-					if(ri->getHandle().getDbgName() == "Soldier_Rigid_Body")
+					if(ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && rj->getHandle().getDbgName() == "Tank_Rigid_Body")
 					{
 						int length = ri->sph.radius + rj->sph.radius+0.5;
 						Vector3 dir = (ri->getBase()->getPos() - rj->getBase()->getPos());
@@ -49,7 +49,7 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 						ri->getBase()->setPos(rj->getBase()->getPos() + length * dir);
 
 					}
-					else if(rj->getHandle().getDbgName() == "Soldier_Rigid_Body")
+					else if(rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && ri->getHandle().getDbgName() == "Tank_Rigid_Body")
 					{
 						int length = rj->sph.radius + ri->sph.radius+1;
 						Vector3 dir = (rj->getBase()->getPos() - ri->getBase()->getPos());
@@ -61,27 +61,52 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 			}
 			else if (ri->type == BOX && rj->type == BOX)
 			{
+				if(ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(ri, Instance()->Ground))
+				{
+					ri->getBase()->setPos(ri->getBase()->getPos() - ri->getBase()->getV());
+					continue;
+				}
+				if(rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(rj, Instance()->Ground))
+				{
+					rj->getBase()->setPos(rj->getBase()->getPos() - ri->getBase()->getV());
+					continue;
+				}
 				if (AABBToAABB(ri, rj)) {
-					if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body")
+					if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && rj->getHandle().getDbgName() == "Tank_Rigid_Body")
 					{
-						int length = 4;
-						Vector3 dir = (ri->getBase()->getPos() - rj->getBase()->getPos());
-						dir.normalize();
-						ri->getBase()->setPos(rj->getBase()->getPos() + length * dir);
-
+						ri->getBase()->setPos(ri->PrevPos + 0.1*ri->getBase()->getU() - 0.05*ri->getBase()->getN());
 					}
-					else if (rj->getHandle().getDbgName() == "Soldier_Rigid_Body")
+					else if (rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && ri->getHandle().getDbgName() == "Tank_Rigid_Body")
 					{
-						int length = 4;
-						Vector3 dir = (rj->getBase()->getPos() - ri->getBase()->getPos());
-						dir.normalize();
-						rj->getBase()->setPos(ri->getBase()->getPos() + length * dir);
+						rj->getBase()->setPos(rj->PrevPos + 0.1*rj->getBase()->getU() - 0.05* ri->getBase()->getN());
 					}
 				}
 			}
-			
 		}
 	}
+}
+
+bool PhysicsEngine::PhysicsManager::SAT(RigidBody a, RigidBody b)
+{
+	Vector3 pointsA[8];
+	Vector3 pointsB[8];
+	PE::Handle hParent = a.getFirstParentByType<PE::Components::Component>();
+	PE::Components::SceneNode* aSN = hParent.getObject<PE::Components::Component>()->getFirstComponent<PE::Components::SceneNode>();
+	if (!aSN)
+	{
+		aSN = hParent.getObject<PE::Components::SceneNode>();
+	}
+	PE::Handle hParent2 = b.getFirstParentByType<PE::Components::Component>();
+	PE::Components::SceneNode* bSN = hParent2.getObject<PE::Components::Component>()->getFirstComponent<PE::Components::SceneNode>();
+	if (!bSN)
+	{
+		bSN = hParent2.getObject<PE::Components::SceneNode>();
+	}
+	a.aabb.getBoundingPoints(aSN->m_base.getPos(), pointsA, aSN->m_base.getU(), aSN->m_base.getV(), aSN->m_base.getN());
+	b.aabb.getBoundingPoints(bSN->m_base.getPos(), pointsB, bSN->m_base.getU(), bSN->m_base.getV(), bSN->m_base.getN());
+
+	//Edges are 0-1, 1-2, 2-3, 3-0,
+	return false;
 }
 
 bool PhysicsEngine::PhysicsManager::SphereToSphere(RigidBody* a, RigidBody* b)

@@ -25,8 +25,9 @@ namespace PhysicsEngine
 		PE_DECLARE_CLASS(RigidBody);
 
 	public:
-		Vector3 currPos; //current position of the object
-		Vector3 destPos; //Destination position of object
+		Vector3 PrevPos; 
+		Vector3 destPos; 
+
 		AABB aabb;
 		Sphere sph;
 		ShapeType type;

@@ -340,8 +340,21 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 					//Add it to PhysicsManager
 					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
 				}
+				else if(StringOps::strcmp(pRealEvent->m_meshFilename, "cobbleplane.x_pplaneshape1_mesh.mesha") == 0)
+				{
+					PE::Handle hRigidBody("Cobblestone", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::BOX);
+					pRigidBody->setBoundingBox(PhysicsEngine::AABB(13, -1, 13));
+					//pRigidBody->setSphere(PhysicsEngine::Sphere(4,1.5));
+					pRigidBody->addDefaultComponents();
+					pSN->addComponent(hRigidBody);
+					//Add it to PhysicsManager
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
+					PhysicsEngine::PhysicsManager::Instance()->Ground = hRigidBody.getObject<PhysicsEngine::RigidBody>();
+				}
 
 				//-------------------------------------------------------------------------------------------------
+
 			}
 			else
 			{

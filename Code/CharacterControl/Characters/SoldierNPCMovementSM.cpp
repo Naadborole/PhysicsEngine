@@ -3,6 +3,8 @@
 #include "PrimeEngine/Lua/LuaEnvironment.h"
 
 #include "SoldierNPCMovementSM.h"
+
+#include "RigidBody.h"
 #include "SoldierNPCAnimationSM.h"
 #include "SoldierNPC.h"
 using namespace PE::Components;
@@ -113,6 +115,11 @@ void SoldierNPCMovementSM::do_UPDATE(PE::Events::Event *pEvt)
 					dist = allowedDisp; // can move up to allowedDisp
 					reached = false; // not reaching destination yet
 				}
+				PE::Handle hsnpc = getFirstParentByType<SoldierNPC>();
+				SoldierNPC* snpc = hsnpc.getObject<SoldierNPC>();
+				PE::Handle hrb = snpc->getFirstComponent<PhysicsEngine::RigidBody>();
+				PhysicsEngine::RigidBody* rb = hrb.getObject<PhysicsEngine::RigidBody>();
+				rb->PrevPos = pSN->m_base.getPos();
 
 				// instantaneous turn
 				pSN->m_base.turnInDirection(dir, 3.1415f);
