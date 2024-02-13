@@ -34,6 +34,11 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 	for (UINT32 i = 0; i < Instance()->m_rigidBodies.m_size; i++)
 	{
 		RigidBody* ri = Instance()->m_rigidBodies[i].getObject<RigidBody>();
+		if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(ri, Instance()->Ground))
+		{
+			ri->getBase()->setPos(ri->getBase()->getPos() - ri->getBase()->getV());
+			continue;
+		}
 		for (UINT32 j = i+1; j < Instance()->m_rigidBodies.m_size; j++)
 		{
 			RigidBody* rj = Instance()->m_rigidBodies[j].getObject<RigidBody>();
@@ -61,16 +66,6 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 			}
 			else if (ri->type == BOX && rj->type == BOX)
 			{
-				if(ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(ri, Instance()->Ground))
-				{
-					ri->getBase()->setPos(ri->getBase()->getPos() - ri->getBase()->getV());
-					continue;
-				}
-				if(rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(rj, Instance()->Ground))
-				{
-					rj->getBase()->setPos(rj->getBase()->getPos() - ri->getBase()->getV());
-					continue;
-				}
 				if (AABBToAABB(ri, rj)) {
 					if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && rj->getHandle().getDbgName() == "Tank_Rigid_Body")
 					{
