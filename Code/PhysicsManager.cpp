@@ -81,29 +81,6 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 	}
 }
 
-bool PhysicsEngine::PhysicsManager::SAT(RigidBody a, RigidBody b)
-{
-	Vector3 pointsA[8];
-	Vector3 pointsB[8];
-	PE::Handle hParent = a.getFirstParentByType<PE::Components::Component>();
-	PE::Components::SceneNode* aSN = hParent.getObject<PE::Components::Component>()->getFirstComponent<PE::Components::SceneNode>();
-	if (!aSN)
-	{
-		aSN = hParent.getObject<PE::Components::SceneNode>();
-	}
-	PE::Handle hParent2 = b.getFirstParentByType<PE::Components::Component>();
-	PE::Components::SceneNode* bSN = hParent2.getObject<PE::Components::Component>()->getFirstComponent<PE::Components::SceneNode>();
-	if (!bSN)
-	{
-		bSN = hParent2.getObject<PE::Components::SceneNode>();
-	}
-	a.aabb.getBoundingPoints(aSN->m_base.getPos(), pointsA, aSN->m_base.getU(), aSN->m_base.getV(), aSN->m_base.getN());
-	b.aabb.getBoundingPoints(bSN->m_base.getPos(), pointsB, bSN->m_base.getU(), bSN->m_base.getV(), bSN->m_base.getN());
-
-	//Edges are 0-1, 1-2, 2-3, 3-0,
-	return false;
-}
-
 bool PhysicsEngine::PhysicsManager::SphereToSphere(RigidBody* a, RigidBody* b)
 {
 	Matrix4x4* baseA = a->getBase();
@@ -117,7 +94,7 @@ bool PhysicsEngine::PhysicsManager::SphereToSphere(RigidBody* a, RigidBody* b)
 
 bool isSeperate(Vector3& RPos, Vector3 Plane, PhysicsEngine::RigidBody* a, PhysicsEngine::RigidBody* b)
 {
-	return (fabs(RPos * Plane) >
+	return (fabs(RPos* Plane) >
 		(fabs((a->getBase()->getN() * a->aabb.Nex) * Plane) +
 			fabs((a->getBase()->getV() * a->aabb.Vex) * Plane) +
 			fabs((a->getBase()->getU() * a->aabb.Uex) * Plane) +
