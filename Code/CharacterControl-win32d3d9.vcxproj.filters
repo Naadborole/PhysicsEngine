@@ -64,6 +64,16 @@
     <ClInclude Include="Sphere.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="PoolBall.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ImPlane.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CharacterControl\Characters\SoldierNPC.cpp">
@@ -107,9 +117,15 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>PhysicsEngine</Filter>
     </ClCompile>
+    <ClCompile Include="PoolBall.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Masm Include="CharacterControl\test.asm" />
     <Masm Include="CharacterControl\testfunc_c_stdcall.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CharacterControl-win32d3d9.rc" />
   </ItemGroup>
 </Project>

@@ -339,6 +339,8 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 					pSN->addComponent(hRigidBody);
 					//Add it to PhysicsManager
 					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
+
+
 				}
 				else if(StringOps::strcmp(pRealEvent->m_meshFilename, "cobbleplane.x_pplaneshape1_mesh.mesha") == 0)
 				{

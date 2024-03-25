@@ -1,0 +1,6 @@
+LevelLoader.CreateGameObject("PEObject1_pPlane1",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -8.326546, 0.0, -4.034357, 1.0, 'poolLevel.x_PEObject1_pPlane.lua', 'Pool',0x3631a80f, 0xea1911ee, 0xa2bc5084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject2_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 0.0, 50.0, -0.0, 1.0, 'poolLevel.x_PEObject2_pSpher.lua', 'Pool',0x3a2f1470, 0xea1911ee, 0xabde5084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject5_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 1000.0, 50.0, -9.511363, 1.0, 'poolLevel.x_PEObject5_pSpher.lua', 'Pool',0x809451ee, 0xea1911ee, 0x88ad5084, 0x92ffdadd)
+

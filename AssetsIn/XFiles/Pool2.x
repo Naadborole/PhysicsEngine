@@ -1,0 +1,93 @@
+xof 0303txt 0032
+
+LevelProperties {
+	1;
+}
+Frame PEObject15_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject15_pSphe.lua"
+	}
+	PEUUID {
+		0x1efad64f, 0xe96811ee, 0x8e805084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,0.000000,50.000000,-0.000000,1.000000;;
+	}
+}
+Frame PEObject22_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject22_pSphe.lua"
+	}
+	PEUUID {
+		0x67e5fb5e, 0xe96811ee, 0xa8915084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,0.000000,50.000000,-100.000000,1.000000;;
+	}
+}
+Frame PEObject23_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject23_pSphe.lua"
+	}
+	PEUUID {
+		0x786b90cf, 0xe96811ee, 0xa9875084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,0.000000,50.000000,100.000000,1.000000;;
+	}
+}
+Frame PEObject24_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject24_pSphe.lua"
+	}
+	PEUUID {
+		0x8c2b1b8f, 0xe96811ee, 0x90095084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,100.000000,50.000000,-50.000000,1.000000;;
+	}
+}
+Frame PEObject25_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject25_pSphe.lua"
+	}
+	PEUUID {
+		0xa00aff91, 0xe96811ee, 0xb72c5084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,100.000000,50.000000,50.000000,1.000000;;
+	}
+}
+Frame PEObject26_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject26_pSphe.lua"
+	}
+	PEUUID {
+		0xbebafc5e, 0xe96811ee, 0x9d045084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,200.000000,50.000000,-0.000000,1.000000;;
+	}
+}
+Frame PEObject27_pPlane1 {
+	MetaScript {
+		"Pool2.x_PEObject27_pPlan.lua"
+	}
+	PEUUID {
+		0xcdb1664f, 0xe96811ee, 0xb4165084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		1.000000,0.000000,-0.000000,0.000000,0.000000,1.000000,-0.000000,0.000000,-0.000000,-0.000000,1.000000,0.000000,-8.326546,0.000000,-4.034357,1.000000;;
+	}
+}
+Frame PEObject28_pSphere1 {
+	MetaScript {
+		"Pool2.x_PEObject28_pSphe.lua"
+	}
+	PEUUID {
+		0xd2d7742e, 0xe96811ee, 0xbf665084, 0x92ffdadd
+	}
+	FrameTransformMatrix {
+		50.000000,0.000000,-0.000000,0.000000,0.000000,50.000000,-0.000000,0.000000,-0.000000,-0.000000,50.000000,0.000000,1000.000000,50.000000,-0.000000,1.000000;;
+	}
+}

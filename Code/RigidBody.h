@@ -27,6 +27,8 @@ namespace PhysicsEngine
 	public:
 		Vector3 PrevPos; 
 		Vector3 destPos; 
+		float mass;
+		Vector3 velocity;
 
 		AABB aabb;
 		Sphere sph;
@@ -48,6 +50,7 @@ namespace PhysicsEngine
 			type = t;
 			aabb = ab;
 		}
+		Vector3 getVelocityNormal();
 		void setBoundingBox(AABB aabb);
 		void setSphere(Sphere s);
 		virtual void addDefaultComponents();

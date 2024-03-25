@@ -23,6 +23,13 @@ namespace PhysicsEngine
 		sph = s;
 	}
 
+	Vector3 RigidBody::getVelocityNormal()
+	{
+		Vector3 t = this->velocity;
+		t.normalize();
+		return t;
+	}
+
 
 	void RigidBody::drawBoundingBox()
 	{

@@ -1,5 +1,6 @@
 #include "ClientGameObjectManagerAddon.h"
 
+#include "PoolBall.h"
 #include "PrimeEngine/PrimeEngineIncludes.h"
 
 #include "Characters/SoldierNPC.h"
@@ -23,6 +24,7 @@ void ClientGameObjectManagerAddon::addDefaultComponents()
 
 	PE_REGISTER_EVENT_HANDLER(Event_CreateSoldierNPC, ClientGameObjectManagerAddon::do_CreateSoldierNPC);
 	PE_REGISTER_EVENT_HANDLER(Event_CREATE_WAYPOINT, ClientGameObjectManagerAddon::do_CREATE_WAYPOINT);
+	PE_REGISTER_EVENT_HANDLER(Event_CreatePoolBall, ClientGameObjectManagerAddon::do_CREATE_PoolBall);
 
 	// note this component (game obj addon) is added to game object manager after network manager, so network manager will process this event first
 	PE_REGISTER_EVENT_HANDLER(PE::Events::Event_SERVER_CLIENT_CONNECTION_ACK, ClientGameObjectManagerAddon::do_SERVER_CLIENT_CONNECTION_ACK);
@@ -39,6 +41,28 @@ void ClientGameObjectManagerAddon::do_CreateSoldierNPC(PE::Events::Event *pEvt)
 	createSoldierNPC(pTrueEvent);
 }
 
+void ClientGameObjectManagerAddon::do_CREATE_PoolBall(PE::Events::Event* pEvt)
+{
+	assert(pEvt->isInstanceOf<Event_CreatePoolBall>());
+
+	Event_CreatePoolBall* pTrueEvent = (Event_CreatePoolBall*)(pEvt);
+
+	createPoolBall(pTrueEvent);
+}
+
+
+void ClientGameObjectManagerAddon::createPoolBall(Vector3 pos, int& threadOwnershipMask)
+{
+	Event_CreatePoolBall evt(threadOwnershipMask);
+	evt.m_pos = pos;
+	evt.m_u = Vector3(1.0f, 0, 0);
+	evt.m_v = Vector3(0, 1.0f, 0);
+	evt.m_n = Vector3(0, 0, 1.0f);
+
+	StringOps::writeToString("Sphere.mesha", evt.m_meshFilename, 255);
+	StringOps::writeToString("Pool", evt.m_package, 255);
+	createPoolBall(&evt);
+}
 void ClientGameObjectManagerAddon::createSoldierNPC(Vector3 pos, int &threadOwnershipMask)
 {
 	Event_CreateSoldierNPC evt(threadOwnershipMask);
@@ -66,6 +90,19 @@ void ClientGameObjectManagerAddon::createSoldierNPC(Event_CreateSoldierNPC *pTru
 	// add the soldier as component to the ObjecManagerComponentAddon
 	// all objects of this demo live in the ObjecManagerComponentAddon
 	addComponent(hSoldierNPC);
+}
+
+void ClientGameObjectManagerAddon::createPoolBall(Event_CreatePoolBall* pTrueEvent)
+{
+	PEINFO("CharacterControl: GameObjectManagerAddon: Creating CreatePoolBall\n");
+
+	PE::Handle hPoolBall("PoolBall", sizeof(SoldierNPC));
+	PoolBall* pPoolBall = new(hPoolBall) PoolBall(*m_pContext, m_arena, hPoolBall, pTrueEvent);
+	pPoolBall->addDefaultComponents();
+
+	// add the soldier as component to the ObjecManagerComponentAddon
+	// all objects of this demo live in the ObjecManagerComponentAddon
+	addComponent(hPoolBall);
 }
 
 void ClientGameObjectManagerAddon::do_CREATE_WAYPOINT(PE::Events::Event *pEvt)

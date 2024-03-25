@@ -1,5 +1,6 @@
 #ifndef _PHYSICS_ENGINE_
 #define _PHYSICS_ENGINE_
+#include "CollisionInfo.h"
 #include "RigidBody.h"
 #include "PrimeEngine/Events/Component.h"
 
@@ -29,12 +30,15 @@ namespace PhysicsEngine
 		}
 		static void drawBoundingBox();
 		static void checkCollision();
-		bool checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2);
+		static bool checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2);
+		static void moveBall();
+		static Array<CollisionInfo> createCollList();
 		Array<PE::Handle, 1> m_rigidBodies;
 		static PhysicsManager* selfPoint;
 		static bool SAT(RigidBody a, RigidBody b);
 		static bool SphereToSphere(RigidBody* a, RigidBody* b);
 		static bool AABBToAABB(RigidBody* a, RigidBody* b);
+		static float getIntersectionDistance(RigidBody *a, RigidBody *b);
 		RigidBody* Ground;
 	};
 }

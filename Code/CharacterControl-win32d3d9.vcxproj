@@ -132,7 +132,11 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     <ClInclude Include="CharacterControl\WayPoint.h" />
     <ClInclude Include="CharacterControl\test.h" />
     <ClInclude Include="CharacterControl\testfunc_c_stdcall.h" />
+    <ClInclude Include="CollisionInfo.h" />
+    <ClInclude Include="ImPlane.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="PoolBall.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>
@@ -155,6 +159,7 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     <ClCompile Include="CharacterControl\WayPoint.cpp" />
     <ClCompile Include="CharacterControl\main.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PoolBall.cpp" />
     <ClCompile Include="RigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +176,9 @@ copy /Y "C:/Program Files (x86)/Windows Kits/8.0\bin\x86\d3dcompiler_46.dll" "$(
     <ProjectReference Include="PrimeEngine-win32d3d9.vcxproj">
       <Project>{0C66E244-78D2-9D3F-41C6-359DADF1BFA7}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CharacterControl-win32d3d9.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,66 @@ namespace CharacterControl {
 namespace Events{
 
 PE_IMPLEMENT_CLASS1(Event_CreateSoldierNPC, PE::Events::Event_CREATE_SKELETON);
+PE_IMPLEMENT_CLASS1(Event_CreatePoolBall, PE::Events::Event_CREATE_SKELETON);
+
+void Event_CreatePoolBall::SetLuaFunctions(PE::Components::LuaEnvironment* pLuaEnv, lua_State* luaVM)
+{
+	static const struct luaL_Reg l_Event_CreatePoolBall[] = {
+		{"Construct", l_Construct},
+		{NULL, NULL} // sentinel
+	};
+
+	// register the functions in current lua table which is the table for Event_CreateSoldierNPC
+	luaL_register(luaVM, 0, l_Event_CreatePoolBall);
+}
+
+int Event_CreatePoolBall::l_Construct(lua_State* luaVM)
+{
+	PE::Handle h("EVENT", sizeof(Event_CreatePoolBall));
+
+	// get arguments from stack
+	int numArgs, numArgsConst;
+	numArgs = numArgsConst = 17;
+
+	PE::GameContext* pContext = (PE::GameContext*)(lua_touserdata(luaVM, -numArgs--));
+
+	// this function should only be called frm game thread, so we can use game thread thread owenrship mask
+	Event_CreatePoolBall* pEvt = new(h) Event_CreatePoolBall(pContext->m_gameThreadThreadOwnershipMask);
+
+	float positionFactor = 1.0f / 100.0f;
+
+	const char* name = lua_tostring(luaVM, -numArgs--);
+	const char* package = lua_tostring(luaVM, -numArgs--);
+
+	Vector3 playerPos, u, v, n;
+	playerPos.m_x = (float)lua_tonumber(luaVM, -numArgs--) * positionFactor;
+	playerPos.m_y = (float)lua_tonumber(luaVM, -numArgs--) * positionFactor;
+	playerPos.m_z = (float)lua_tonumber(luaVM, -numArgs--) * positionFactor;
+
+	u.m_x = (float)lua_tonumber(luaVM, -numArgs--); u.m_y = (float)lua_tonumber(luaVM, -numArgs--); u.m_z = (float)lua_tonumber(luaVM, -numArgs--);
+	v.m_x = (float)lua_tonumber(luaVM, -numArgs--); v.m_y = (float)lua_tonumber(luaVM, -numArgs--); v.m_z = (float)lua_tonumber(luaVM, -numArgs--);
+	n.m_x = (float)lua_tonumber(luaVM, -numArgs--); n.m_y = (float)lua_tonumber(luaVM, -numArgs--); n.m_z = (float)lua_tonumber(luaVM, -numArgs--);
+
+	//kjbfiabsijfbi
+	pEvt->num = (int)lua_tonumber(luaVM, -numArgs--);
+
+	pEvt->m_peuuid = LuaGlue::readPEUUID(luaVM, -numArgs--);
+	lua_pop(luaVM, numArgsConst); //Second arg is a count of how many to pop
+
+	StringOps::writeToString(name, pEvt->m_meshFilename, 255);
+	StringOps::writeToString(package, pEvt->m_package, 255);
+
+	pEvt->hasCustomOrientation = true;
+	pEvt->m_pos = playerPos;
+	pEvt->m_u = u;
+	pEvt->m_v = v;
+	pEvt->m_n = n;
+
+	LuaGlue::pushTableBuiltFromHandle(luaVM, h);
+
+	return 1;
+}
+
 
 void Event_CreateSoldierNPC::SetLuaFunctions(PE::Components::LuaEnvironment *pLuaEnv, lua_State *luaVM)
 {

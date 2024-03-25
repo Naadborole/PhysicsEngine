@@ -8,7 +8,29 @@ PhysicsEngine::PhysicsManager* PhysicsEngine::PhysicsManager::selfPoint = nullpt
 
 bool PhysicsEngine::PhysicsManager::checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2)
 {
-	return false;
+	if(r1->type == BOX)
+	{
+		if(r2->type == BOX)
+		{
+			return false;
+		}
+		else if(r2->type == SPHERE)
+		{
+			return false;
+		}
+	}
+	else if(r1->type == SPHERE)
+	{
+		if(r2->type == BOX)
+		{
+			return false;
+		}
+		else if(r2->type == SPHERE)
+		{
+			return SphereToSphere(r1, r2);
+		}
+	}
+	return true;
 }
 
 PhysicsEngine::PhysicsManager::PhysicsManager()
@@ -29,53 +51,51 @@ void PhysicsEngine::PhysicsManager::drawBoundingBox()
 	}
 }
 
+void PhysicsEngine::PhysicsManager::moveBall()
+{
+	for (UINT32 i = 0; i < Instance()->m_rigidBodies.m_size; i++)
+	{
+		RigidBody* ri = Instance()->m_rigidBodies[i].getObject<RigidBody>();
+		if(ri->type == SPHERE)
+		{
+			if (ri->velocity.length() != 0) {
+				ri->getBase()->setPos(ri->getBase()->getPos() + ri->velocity);
+			}
+		}
+	}
+}
+
+float PhysicsEngine::PhysicsManager::getIntersectionDistance(RigidBody* a, RigidBody* b)
+{
+	Matrix4x4* baseA = a->getBase();
+	Matrix4x4* baseB = b->getBase();
+	Vector3 centerA = baseA->getPos();
+	Vector3 centerB = baseB->getPos();
+	return (a->sph.radius + b->sph.radius) - (centerB - centerA).length();
+}
+
+
 void PhysicsEngine::PhysicsManager::checkCollision()
 {
 	for (UINT32 i = 0; i < Instance()->m_rigidBodies.m_size; i++)
 	{
 		RigidBody* ri = Instance()->m_rigidBodies[i].getObject<RigidBody>();
-		if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && !AABBToAABB(ri, Instance()->Ground))
-		{
-			ri->getBase()->setPos(ri->getBase()->getPos() - ri->getBase()->getV());
-			continue;
-		}
+		
 		for (UINT32 j = i+1; j < Instance()->m_rigidBodies.m_size; j++)
 		{
 			RigidBody* rj = Instance()->m_rigidBodies[j].getObject<RigidBody>();
-			if(ri->type == SPHERE && rj->type == SPHERE)
+			if(checkCollision(ri,rj))
 			{
-				if (AABBToAABB(ri, rj))
-				{
-					if(ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && rj->getHandle().getDbgName() == "Tank_Rigid_Body")
-					{
-						int length = ri->sph.radius + rj->sph.radius+0.5;
-						Vector3 dir = (ri->getBase()->getPos() - rj->getBase()->getPos());
-						dir.normalize();
-						ri->getBase()->setPos(rj->getBase()->getPos() + length * dir);
-
-					}
-					else if(rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && ri->getHandle().getDbgName() == "Tank_Rigid_Body")
-					{
-						int length = rj->sph.radius + ri->sph.radius+1;
-						Vector3 dir = (rj->getBase()->getPos() - ri->getBase()->getPos());
-						dir.normalize();
-						rj->getBase()->setPos(ri->getBase()->getPos() + length * dir);
-					}
-				}
-					
-			}
-			else if (ri->type == BOX && rj->type == BOX)
-			{
-				if (AABBToAABB(ri, rj)) {
-					if (ri->getHandle().getDbgName() == "Soldier_Rigid_Body" && rj->getHandle().getDbgName() == "Tank_Rigid_Body")
-					{
-						ri->getBase()->setPos(ri->PrevPos + 0.1*ri->getBase()->getU() - 0.05*ri->getBase()->getN());
-					}
-					else if (rj->getHandle().getDbgName() == "Soldier_Rigid_Body" && ri->getHandle().getDbgName() == "Tank_Rigid_Body")
-					{
-						rj->getBase()->setPos(rj->PrevPos + 0.1*rj->getBase()->getU() - 0.05* ri->getBase()->getN());
-					}
-				}
+				float Idist = getIntersectionDistance(ri, rj);
+				Vector3 v_rel = ri->velocity - rj->velocity;
+				Vector3 n = rj->getBase()->getPos() - ri->getBase()->getPos();
+				n.normalize();
+				ri->getBase()->setPos(ri->getBase()->getPos() + (-Idist) * n);
+				float J = ((-1 - 0.6)*v_rel.dotProduct(n)) / ((1 / ri->mass) + (1 / rj->mass));
+				Vector3 v_i = ri->velocity + (J / ri->mass) * n;
+				Vector3 v_j = rj->velocity - (J / rj->mass) * n;
+				ri->velocity = v_i;
+				rj->velocity = v_j;
 			}
 		}
 	}
@@ -85,11 +105,11 @@ bool PhysicsEngine::PhysicsManager::SphereToSphere(RigidBody* a, RigidBody* b)
 {
 	Matrix4x4* baseA = a->getBase();
 	Matrix4x4* baseB = b->getBase();
-	Vector3 centerA = baseA->getPos() + a->sph.centerOffset* baseA->getV();
-	Vector3 centerB = baseB->getPos() + b->sph.centerOffset * baseB->getV();
+	Vector3 centerA = baseA->getPos();
+	Vector3 centerB = baseB->getPos();
 	float length = (centerB - centerA).length();
-	float center = a->sph.radius + b->sph.radius;
-	return (centerB - centerA).length() < (a->sph.radius + b->sph.radius);
+	float distAddRadius = a->sph.radius + b->sph.radius;
+	return length < (distAddRadius);
 }
 
 bool isSeperate(Vector3& RPos, Vector3 Plane, PhysicsEngine::RigidBody* a, PhysicsEngine::RigidBody* b)

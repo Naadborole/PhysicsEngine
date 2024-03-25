@@ -57,11 +57,13 @@ int ClientCharacterControlGame::initGame()
         PE::Handle hGOMAddon = PE::Handle("ClientGameObjectManagerAddon", sizeof(ClientGameObjectManagerAddon));
 		pGameCtx->m_pGameObjectManagerAddon = new(hGOMAddon) ClientGameObjectManagerAddon(*m_pContext, m_arena, hGOMAddon);
 		pGameCtx->getGameObjectManagerAddon()->addDefaultComponents();
-	
 		// add it to game object manager
 		// now all game events will be passed through to our GameObjectManagerAddon
 		m_pContext->getGameObjectManager()->addComponent(hGOMAddon);
 	}
+
+	//Add sphere check
+	
 
 	bool spawnALotOfSoldiersForGpuAnim = false;
 
@@ -219,7 +221,6 @@ int ClientCharacterControlGame::initGame()
             }
         }
     }
-
 	
 #if PE_PLAT_IS_WIN32
 	
