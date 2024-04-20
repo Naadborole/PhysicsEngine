@@ -29,26 +29,33 @@ namespace CharacterControl {
 			pMainSN->m_base.setU(pEvt->m_u);
 			pMainSN->m_base.setV(pEvt->m_v);
 			pMainSN->m_base.setN(pEvt->m_n);
-			PE::Handle hRigidBody("Pool_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
-			PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::SPHERE);
-			pRigidBody->setSphere(PhysicsEngine::Sphere(0.5));
-			pRigidBody->mass = 1;
-			//pRigidBody->setSphere(PhysicsEngine::Sphere(1.8/2,1.8/2));
-			pRigidBody->addDefaultComponents();
-			addComponent(hRigidBody);
-			//Add it to PhysicsManager
-			PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
 
-			if(pEvt->num == 1)
+			if (pEvt->num == 100 || pEvt->num == 101 || pEvt->num == 102 || pEvt->num == 103)
 			{
-				pRigidBody->velocity = Vector3(-0.1,0,0);
+				PhysicsEngine::PhysicsManager::setCorner(pEvt->num, pEvt->m_pos);
 			}
-			else
-			{
-				pRigidBody->velocity = Vector3(0, 0, 0);
+			else {
+				PE::Handle hRigidBody("Pool_Rigid_Body", sizeof(PhysicsEngine::RigidBody));
+				PhysicsEngine::RigidBody* pRigidBody = new(hRigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, hRigidBody, PhysicsEngine::SPHERE);
+				pRigidBody->setSphere(PhysicsEngine::Sphere(0.5));
 				pRigidBody->mass = 1;
-			}
+				//pRigidBody->setSphere(PhysicsEngine::Sphere(1.8/2,1.8/2));
+				pRigidBody->addDefaultComponents();
+				addComponent(hRigidBody);
+				//Add it to PhysicsManager
+				PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
 
+				if (pEvt->num == 1)
+				{
+					PhysicsEngine::PhysicsManager::Instance()->zeroBall = pRigidBody;
+					pRigidBody->velocity = Vector3(-0.2, 0, 0);
+				}
+				else
+				{
+					pRigidBody->velocity = Vector3(0, 0, 0);
+					pRigidBody->mass = 1;
+				}
+			}
 			RootSceneNode::Instance()->addComponent(hSN);
 
 			// add the scene node as component of soldier without any handlers. this is just data driven way to locate scnenode for soldier's components

@@ -1,6 +1,16 @@
+LevelLoader.CreateGameObject("PEObject2_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 0.0, 50.0, -0.0, 1.0, 'poolLevel.x_PEObject2_pSpher.lua', 'Pool',0x3a2f1470, 0xea1911ee, 0xabde5084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject10_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, -1250.0, 50.0, 1250.0, 1.0, 'poolLevel.x_PEObject10_pSphe.lua', 'Pool',0xdbbfe8c0, 0xfb6511ee, 0xa1f85084, 0x92ffdadd)
+
 LevelLoader.CreateGameObject("PEObject1_pPlane1",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -8.326546, 0.0, -4.034357, 1.0, 'poolLevel.x_PEObject1_pPlane.lua', 'Pool',0x3631a80f, 0xea1911ee, 0xa2bc5084, 0x92ffdadd)
 
-LevelLoader.CreateGameObject("PEObject2_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 0.0, 50.0, -0.0, 1.0, 'poolLevel.x_PEObject2_pSpher.lua', 'Pool',0x3a2f1470, 0xea1911ee, 0xabde5084, 0x92ffdadd)
+LevelLoader.CreateGameObject("PEObject6_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, -181.351566, 50.0, 91.781664, 1.0, 'poolLevel.x_PEObject6_pSpher.lua', 'Pool',0x0f0f870f, 0xee3411ee, 0xa2675084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject8_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 1250.0, 50.0, 1250.0, 1.0, 'poolLevel.x_PEObject8_pSpher.lua', 'Pool',0xa6b1c180, 0xfb6511ee, 0xa0f85084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject9_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, -1250.0, 50.0, -1250.0, 1.0, 'poolLevel.x_PEObject9_pSpher.lua', 'Pool',0xc8a131e1, 0xfb6511ee, 0x8e495084, 0x92ffdadd)
+
+LevelLoader.CreateGameObject("PEObject7_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 1250.0, 50.0, -1250.0, 1.0, 'poolLevel.x_PEObject7_pSpher.lua', 'Pool',0x4a86c900, 0xfb6511ee, 0x99855084, 0x92ffdadd)
 
 LevelLoader.CreateGameObject("PEObject5_pSphere1",50.0, 0.0, -0.0, 0.0, 0.0, 50.0, -0.0, 0.0, -0.0, -0.0, 50.0, 0.0, 1000.0, 50.0, -9.511363, 1.0, 'poolLevel.x_PEObject5_pSpher.lua', 'Pool',0x809451ee, 0xea1911ee, 0x88ad5084, 0x92ffdadd)
 

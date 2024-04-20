@@ -6,6 +6,23 @@
 PhysicsEngine::PhysicsManager* PhysicsEngine::PhysicsManager::selfPoint = nullptr;
 
 
+bool PhysicsEngine::PhysicsManager::doesfallinHole(Vector3 pos)
+{
+	float dis = (Instance()->CornerA - pos).length();
+	if (dis < 2)
+		return true;
+	dis = (Instance()->CornerB - pos).length();
+	if (dis < 2)
+		return true;
+	dis = (Instance()->CornerC - pos).length();
+	if (dis < 2)
+		return true;
+	dis = (Instance()->CornerD - pos).length();
+	if (dis < 2)
+		return true;
+	return false;
+}
+
 bool PhysicsEngine::PhysicsManager::checkCollision(PhysicsEngine::RigidBody* r1, PhysicsEngine::RigidBody* r2)
 {
 	if(r1->type == BOX)
@@ -29,8 +46,19 @@ bool PhysicsEngine::PhysicsManager::checkCollision(PhysicsEngine::RigidBody* r1,
 		{
 			return SphereToSphere(r1, r2);
 		}
+		else if(r2->type == IMPLANE)
+		{
+			return SphereToPlane(r1, r2);
+		}
 	}
-	return true;
+	else if(r1->type == IMPLANE)
+	{
+		if(r2->type == SPHERE)
+		{
+			return SphereToPlane(r2, r1);
+		}
+	}
+	return false;
 }
 
 PhysicsEngine::PhysicsManager::PhysicsManager()
@@ -38,6 +66,19 @@ PhysicsEngine::PhysicsManager::PhysicsManager()
 	m_rigidBodies.reset(512);
 	selfPoint = nullptr;
 }
+
+void PhysicsEngine::PhysicsManager::setCorner(int id, Vector3 pos)
+{
+	if (id == 100)
+		Instance()->CornerA = pos;
+	else if (id == 101)
+		Instance()->CornerB = pos;
+	else if (id == 102)
+		Instance()->CornerC = pos;
+	else
+		Instance()->CornerD = pos;
+}
+
 
 void PhysicsEngine::PhysicsManager::drawBoundingBox()
 {
@@ -51,6 +92,22 @@ void PhysicsEngine::PhysicsManager::drawBoundingBox()
 	}
 }
 
+void PhysicsEngine::PhysicsManager::moveZeroBall(Vector3 camPos, Vector3 camN)
+{
+	if (Instance()->zeroBall == nullptr)
+		return;
+	Vector3 dir = Instance()->zeroBall->getBase()->getPos() - camPos;
+	dir = Vector3(dir.getX(), 0, dir.getZ());
+	dir.normalize();
+	Instance()->zeroBall->velocity = 0.2 * dir;
+}
+
+Vector3 PhysicsEngine::PhysicsManager::getPerpendicular(Vector3 A)
+{
+	return A.crossProduct(Vector3(0, 1, 0));
+}
+
+
 void PhysicsEngine::PhysicsManager::moveBall()
 {
 	for (UINT32 i = 0; i < Instance()->m_rigidBodies.m_size; i++)
@@ -59,7 +116,11 @@ void PhysicsEngine::PhysicsManager::moveBall()
 		if(ri->type == SPHERE)
 		{
 			if (ri->velocity.length() != 0) {
+				Vector3 perp = getPerpendicular(ri->velocity);
+				perp.normalize();
 				ri->getBase()->setPos(ri->getBase()->getPos() + ri->velocity);
+				ri->getBase()->turnAboutAxis(ri->velocity.length(), perp);
+				ri->velocity = 0.998 * (ri->velocity);
 			}
 		}
 	}
@@ -86,16 +147,44 @@ void PhysicsEngine::PhysicsManager::checkCollision()
 			RigidBody* rj = Instance()->m_rigidBodies[j].getObject<RigidBody>();
 			if(checkCollision(ri,rj))
 			{
-				float Idist = getIntersectionDistance(ri, rj);
-				Vector3 v_rel = ri->velocity - rj->velocity;
-				Vector3 n = rj->getBase()->getPos() - ri->getBase()->getPos();
-				n.normalize();
-				ri->getBase()->setPos(ri->getBase()->getPos() + (-Idist) * n);
-				float J = ((-1 - 0.6)*v_rel.dotProduct(n)) / ((1 / ri->mass) + (1 / rj->mass));
-				Vector3 v_i = ri->velocity + (J / ri->mass) * n;
-				Vector3 v_j = rj->velocity - (J / rj->mass) * n;
-				ri->velocity = v_i;
-				rj->velocity = v_j;
+				if (ri->type == SPHERE && rj->type == SPHERE) {
+					float Idist = getIntersectionDistance(ri, rj);
+					Vector3 v_rel = ri->velocity - rj->velocity;
+					Vector3 n = rj->getBase()->getPos() - ri->getBase()->getPos();
+					n.normalize();
+					ri->getBase()->setPos(ri->getBase()->getPos() + (-Idist) * n);
+					float J = ((-1 - 0.6) * v_rel.dotProduct(n)) / ((1 / ri->mass) + (1 / rj->mass));
+					Vector3 v_i = ri->velocity + (J / ri->mass) * n;
+					Vector3 v_j = rj->velocity - (J / rj->mass) * n;
+					ri->velocity = v_i;
+					rj->velocity = v_j;
+				}
+				else if((ri->type == SPHERE && rj->type == IMPLANE) || (rj->type == SPHERE && ri->type == IMPLANE))
+				{
+					RigidBody* rs, * rl;
+					if(ri->type == SPHERE)
+					{
+						rs = ri;
+						rl = rj;
+					}
+					else
+					{
+						rs = rj;
+						rl = ri;
+					}
+					float dist = rs->sph.radius - (rs->getBase()->getPos() - rl->pln.p).dotProduct(rl->pln.n);
+					rs->getBase()->setPos(rs->getBase()->getPos() + (dist) * rl->pln.n);
+					Vector3 reflected = 2*(rs->velocity.dotProduct(rl->pln.n))*rl->pln.n;
+					rs->velocity -= reflected;
+					rs->velocity = 0.8 * (rs->velocity);
+				}
+			}
+		}
+		if (ri->type == SPHERE) {
+			Vector3 pos = ri->getBase()->getPos();
+			if (doesfallinHole(pos))
+			{
+				ri->velocity = Vector3(0, -2, 0);
 			}
 		}
 	}
@@ -148,3 +237,9 @@ bool PhysicsEngine::PhysicsManager::AABBToAABB(RigidBody* a, RigidBody* b)
 		isSeperate(RPos, a->getBase()->getU().crossProduct( b->getBase()->getU()), a, b));
 }
 
+bool PhysicsEngine::PhysicsManager::SphereToPlane(RigidBody* rs, RigidBody* rl)
+{
+	float dist = (rs->getBase()->getPos() - rl->pln.p).dotProduct(rl->pln.n);
+	return dist < rs->sph.radius;
+
+}

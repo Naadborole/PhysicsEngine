@@ -9,6 +9,7 @@
 // Sibling/Children includes
 #include "GameObjectManager.h"
 
+#include "ImPlane.h"
 #include "PhysicsManager.h"
 #include "../Sound/SoundManager.h"
 
@@ -338,8 +339,6 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 					pRigidBody->addDefaultComponents();
 					pSN->addComponent(hRigidBody);
 					//Add it to PhysicsManager
-					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
-
 
 				}
 				else if(StringOps::strcmp(pRealEvent->m_meshFilename, "cobbleplane.x_pplaneshape1_mesh.mesha") == 0)
@@ -353,6 +352,33 @@ void GameObjectManager::do_CREATE_MESH(Events::Event *pEvt)
 					//Add it to PhysicsManager
 					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
 					PhysicsEngine::PhysicsManager::Instance()->Ground = hRigidBody.getObject<PhysicsEngine::RigidBody>();
+
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(hRigidBody);
+					PE::Handle h1RigidBody("Plane_Pos_x", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* p1RigidBody = new(h1RigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, h1RigidBody, PhysicsEngine::IMPLANE);
+					p1RigidBody->pln = PhysicsEngine::ImPlane(Vector3(12, 0, 0), Vector3(-1, 0, 0));
+
+					PE::Handle h2RigidBody("Plane_Neg_x", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* p2RigidBody = new(h2RigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, h2RigidBody, PhysicsEngine::IMPLANE);
+					p2RigidBody->pln = PhysicsEngine::ImPlane(Vector3(-12, 0, 0), Vector3(1, 0, 0));
+
+					PE::Handle h3RigidBody("Plane_Pos_z", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* p3RigidBody = new(h3RigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, h3RigidBody, PhysicsEngine::IMPLANE);
+					p3RigidBody->pln = PhysicsEngine::ImPlane(Vector3(0, 0, 12), Vector3(0, 0, -1));
+
+					PE::Handle h4RigidBody("Plane_Neg_z", sizeof(PhysicsEngine::RigidBody));
+					PhysicsEngine::RigidBody* p4RigidBody = new(h4RigidBody) PhysicsEngine::RigidBody(*m_pContext, m_arena, h4RigidBody, PhysicsEngine::IMPLANE);
+					p4RigidBody->pln = PhysicsEngine::ImPlane(Vector3(0, 0, -12), Vector3(0, 0, 1));
+
+
+					pSN->addComponent(h1RigidBody);
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(h1RigidBody);
+					pSN->addComponent(h2RigidBody);
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(h2RigidBody);
+					pSN->addComponent(h3RigidBody);
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(h3RigidBody);
+					pSN->addComponent(h4RigidBody);
+					PhysicsEngine::PhysicsManager::Instance()->addRigidBody(h4RigidBody);
 				}
 
 				//-------------------------------------------------------------------------------------------------

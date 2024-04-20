@@ -9,6 +9,7 @@
 #include <assert.h>
 
 // Inter-Engine includes
+#include "ImPlane.h"
 #include "Sphere.h"
 #include "PrimeEngine/Math/Matrix4x4.h"
 #include "PrimeEngine/MemoryManagement/Handle.h"
@@ -18,7 +19,7 @@
 
 namespace PhysicsEngine
 {
-	enum ShapeType{BOX, SPHERE};
+	enum ShapeType{BOX, SPHERE, IMPLANE};
 
 	struct RigidBody : public PE::Components::Component
 	{
@@ -32,6 +33,7 @@ namespace PhysicsEngine
 
 		AABB aabb;
 		Sphere sph;
+		ImPlane pln;
 		ShapeType type;
 		RigidBody(PE::GameContext& context, PE::MemoryArena arena, PE::Handle hMyself, ShapeType t) : Component(
 			context, arena, hMyself)

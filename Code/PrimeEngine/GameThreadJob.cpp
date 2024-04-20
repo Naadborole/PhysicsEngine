@@ -419,6 +419,11 @@ int ClientGame::runGameFrame()
         {
 			// physics kick off
         }
+		else if(Event_KEY_L_HELD::GetClassId() == pGeneralEvt->getClassId())
+		{
+			if(PhysicsEngine::PhysicsManager::Instance() != nullptr)
+				PhysicsEngine::PhysicsManager::moveZeroBall(pcam->m_base.getPos(), pcam->m_base.getN());
+		}
         else
         {
             // unknown event

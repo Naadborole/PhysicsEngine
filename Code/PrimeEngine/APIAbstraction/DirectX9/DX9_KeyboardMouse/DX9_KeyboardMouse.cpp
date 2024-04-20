@@ -113,9 +113,15 @@ void DX9_KeyboardMouse::generateButtonEvents()
 		}
 		if(GetAsyncKeyState('L') & 0x8000)
 		{
+			/*Handle h("EVENT", sizeof(Event_KEY_L_HELD));
+			new (h) Event_KEY_L_HELD;
+			m_pQueueManager->add(h, Events::QT_INPUT);*/
+		}
+		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+		{
 			Handle h("EVENT", sizeof(Event_KEY_L_HELD));
 			new (h) Event_KEY_L_HELD;
-			m_pQueueManager->add(h, Events::QT_INPUT);
+			m_pQueueManager->add(h);
 		}
 	}
 }
